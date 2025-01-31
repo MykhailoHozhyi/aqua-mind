@@ -1,0 +1,31 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: AquaMind app
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  description: This is a documentation of AquaMind app
+tags:
+  - name: Auth
+    description: Auth operations.
+  - name: User
+    description: Operations about user.
+  - name: WaterRate
+    description: Calc of daily water intake.
+  - name: Water
+    description: Water operations.
+  - name: Today
+    description: Information about water consumption per day.
+  - name: Month
+    description: Information about water consumption per month.
+servers:
+  - url: http://localhost:3000
+  - url: https://example.com/api/v1
+paths:
+  # тут будуть наші роути
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
