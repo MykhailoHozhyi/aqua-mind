@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-export const updateUserSchema = Joi.object({
+export const userSchema = Joi.object({
   gender: Joi.string().valid('woman', 'man').default('woman'),
   name: Joi.string().max(32),
   email: Joi.string().email().messages({

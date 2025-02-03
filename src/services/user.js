@@ -1,24 +1,18 @@
-import { UserCollection } from '../db/models/user.js';
+import { UsersCollection } from '../db/models/user.js';
 import bcrypt from 'bcrypt';
 import createHttpError from 'http-errors';
 
 export const getUserById = async (userId) => {
-  const user = await UserCollection.findOne({ _id: userId });
+  const user = await UsersCollection.findOne({ _id: userId });
   return user;
 };
-
-// (async () => {
-//   const password = '2222222222'; // Пароль для хешування
-//   const hashedPassword = await bcrypt.hash(password, 10); // Хешування пароля
-//   console.log('Хешований пароль:', hashedPassword);
-// })();
 
 export const patchUser = async (userId, payload, options = {}) => {
   const { oldPassword, password, ...restPayload } = payload;
   console.log('oldPassword', oldPassword);
   console.log('password', password);
 
-  const user = await UserCollection.findById(userId);
+  const user = await UsersCollection.findById(userId);
   if (!user) {
     throw new Error('User not found');
   }
@@ -39,7 +33,7 @@ export const patchUser = async (userId, payload, options = {}) => {
     }
   }
   // Оновлення користувача
-  const updatedUser = await UserCollection.findByIdAndUpdate(
+  const updatedUser = await UsersCollection.findByIdAndUpdate(
     userId,
     { $set: restPayload },
     {
@@ -58,7 +52,7 @@ export const patchUser = async (userId, payload, options = {}) => {
 };
 
 export const updateAvatar = async (userId, payload, options = {}) => {
-  const rawResult = await UserCollection.findByIdAndUpdate(
+  const rawResult = await UsersCollection.findByIdAndUpdate(
     { _id: userId },
     payload,
     {
