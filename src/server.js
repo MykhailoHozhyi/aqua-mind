@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import pino from 'pino-http';
 import cookieParser from 'cookie-parser';
-
+import waterRouter from './routers/water.js';
 import { getEnvVar } from './utils/getEnvVar.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
@@ -25,6 +25,8 @@ export const setupServer = () => {
       },
     }),
   );
+
+  app.use('/water', waterRouter);
 
   app.use('/api-docs', swaggerDocs());
 
