@@ -13,19 +13,20 @@ const userSchema = new Schema(
     },
     gender: {
       type: String,
-      enum: ['female', 'male'],
-      default: 'female',
+      enum: ['woman', 'man'],
+      default: 'women',
       required: true,
     },
     name: {
       type: String,
-      required: true,
     },
     photo: {
       type: String,
     },
     waterRate: {
-      type: String,
+      type: Number,
+      default: 1500,
+      required: true,
     },
   },
   {
