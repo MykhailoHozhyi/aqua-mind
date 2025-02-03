@@ -2,6 +2,15 @@ import { model, Schema } from 'mongoose';
 
 const userSchema = new Schema(
   {
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
     gender: {
       type: String,
       enum: ['woman', 'man'],
@@ -11,16 +20,13 @@ const userSchema = new Schema(
     name: {
       type: String,
     },
-    email: {
+    photo: {
       type: String,
-      unique: true,
-      required: true,
     },
-    password: { type: String },
-    photo: { type: String },
     waterRate: {
       type: Number,
       default: 1500,
+      required: true,
     },
   },
   {
@@ -35,4 +41,4 @@ userSchema.methods.toJSON = function () {
   return obj;
 };
 
-export const UsersCollection = model('user', userSchema);
+export const UsersCollection = model('users', userSchema);
