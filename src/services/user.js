@@ -56,3 +56,20 @@ export const patchUser = async (userId, payload, options = {}) => {
     isNew: Boolean(updatedUser?.lastErrorObject?.upserted),
   };
 };
+
+export const updateAvatar = async (userId, payload, options = {}) => {
+  const rawResult = await UserCollection.findByIdAndUpdate(
+    { _id: userId },
+    payload,
+    {
+      new: true,
+      includeResultMetadata: true,
+      ...options,
+    },
+  );
+  if (!rawResult || !rawResult.value) return null;
+  return {
+    user: rawResult.value,
+    isNew: Boolean(rawResult?.lastErrorObject?.upserted),
+  };
+};

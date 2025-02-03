@@ -15,8 +15,8 @@ const updateUserSchema = new Schema(
       unique: true,
       required: true,
     },
-    // oldPassword: { type: String },
     password: { type: String },
+    photo: { type: String },
   },
   {
     timestamps: true,

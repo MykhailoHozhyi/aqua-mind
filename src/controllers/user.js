@@ -1,9 +1,8 @@
 import { getEnvVar } from '../utils/getEnvVar.js';
-import { getUserById, patchUser } from '../services/user.js';
+import { getUserById, patchUser, updateAvatar } from '../services/user.js';
 import createHttpError from 'http-errors';
-
-// import { saveFileToUploadDir } from '../utils/saveFileToUploadDir.js';
-// import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
+import { saveFileToUploadDir } from '../utils/saveFileToUploadDir.js';
+import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
 
 export const getUserByIdController = async (req, res, next) => {
   const { userId } = req.params;
@@ -36,4 +35,32 @@ export const patchUserController = async (req, res, next) => {
   });
 };
 
-export const patchUserAvatarController = async (req, res, next) => {};
+export const patchUserAvatarController = async (req, res, next) => {
+  const { userId } = req.params;
+  const photo = req.file;
+  let photoUrl;
+  if (photo) {
+    if (getEnvVar('ENABLE_CLOUDINARY') === 'true') {
+      photoUrl = await saveFileToCloudinary(photo);
+    } else {
+      photoUrl = await saveFileToUploadDir(photo);
+    }
+  }
+  const result = await updateAvatar(
+    userId,
+    {
+      photo: photoUrl,
+    },
+    { new: true },
+  );
+
+  if (!result) {
+    next(createHttpError(404, 'User not found'));
+    return;
+  }
+  res.json({
+    status: 200,
+    message: `Successfully added an avatar!`,
+    data: result.user,
+  });
+};

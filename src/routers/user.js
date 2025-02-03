@@ -22,9 +22,9 @@ router.patch(
 );
 
 router.patch(
-  '/:userId/avatar',
+  '/:userId/photo',
   isValidId,
-  upload.single('avatar'),
+  upload.single('photo'),
   ctrlWrapper(patchUserAvatarController),
 );
 export default router;
