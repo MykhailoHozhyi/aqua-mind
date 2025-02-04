@@ -1,0 +1,59 @@
+tags:
+  - User
+summary: Update user
+operationId: patchUser
+description: 'Update a contact with the provided payload. Only fields in the request body will be updated.'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: userId
+    required: true
+    schema:
+      type: string
+      example: '65ca67e7ae7f10c88b598384'
+    description: ID of the user to update
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          gender:
+            description: Choose your gender
+            type: string
+            enum: ['woman', 'man']
+            default: woman
+          name:
+            description: Name of user
+            type: string
+            example: 'John Doe'
+          email:
+            description: Users's email address
+            type: string
+            example: 'Doe@example.com'
+responses:
+  '200':
+    description: Successfully updated a contact
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: Successfully updated a contact!
+            data:
+              type: object
+              $ref: ../../../components/schemas/userSchema.yaml
+  '400':
+    $ref: ../../../components/responses/400.yaml
+  '404':
+    $ref: ../../../components/responses/404.yaml
