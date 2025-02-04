@@ -12,7 +12,7 @@ export const getWaterRateController = async (req, res) => {
   });
 };
 
-export const upsertWaterRateController = async (req, res, next) => {
+export const updateWaterRateController = async (req, res, next) => {
   const userId = req.user._id;
   const waterRate = await updateWaterRate(userId, req.body);
 

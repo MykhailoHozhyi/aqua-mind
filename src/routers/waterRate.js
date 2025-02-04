@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import {
   getWaterRateController,
-  upsertWaterRateController,
+  updateWaterRateController,
 } from '../controllers/waterRate.js';
 import { ctrlWrapper } from './../utils/ctrlWrapper.js';
 import { validateBody } from '../middlewares/validateBody.js';
@@ -11,11 +11,11 @@ import { authenticate } from './../middlewares/authenticate.js';
 const router = Router();
 
 router.get('/', authenticate, ctrlWrapper(getWaterRateController));
-router.put(
+router.patch(
   '/',
   authenticate,
   validateBody(waterRateSchema),
-  ctrlWrapper(upsertWaterRateController),
+  ctrlWrapper(updateWaterRateController),
 );
 
 export default router;
