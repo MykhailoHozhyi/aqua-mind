@@ -1,23 +1,15 @@
-import { WaterRateCollection } from '../db/models/waterRate.js';
+import { UsersCollection } from './../db/models/user.js';
 
-export const getWaterRate = async () => {
-  const waterRate = await WaterRateCollection.find();
-  return waterRate;
+export const getWaterRate = async (userId) => {
+  const user = await UsersCollection.findById(userId).select('waterRate');
+  return user?.waterRate || 1500;
 };
 
-export const updateWaterRate = async (waterRateId, payload, options = {}) => {
-  const waterRate = await WaterRateCollection.findByIdAndUpdate(
-    { _id: waterRateId },
-    payload,
-    {
-      new: true,
-      includeResultMetadata: true,
-      ...options,
-    },
+export const updateWaterRate = async (userId, payload) => {
+  const user = await UsersCollection.findByIdAndUpdate(
+    userId,
+    { waterRate: payload.waterRate },
+    { new: true },
   );
-  if (!waterRate || !waterRate.value) return null;
-  return {
-    waterRate: waterRate.value,
-    isNew: Boolean(waterRate?.lastErrorObject?.upserted),
-  };
+  return user ? user.waterRate : null;
 };
