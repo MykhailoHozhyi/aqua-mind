@@ -5,7 +5,7 @@ import { validateBody } from '../middlewares/validateBody.js';
 import { isValidId } from '../middlewares/isValidId.js';
 import * as waterSchemas from '../validation/water.js';
 
-const waterRouter = Router();
+const router = Router();
 
 waterRouter.get('/', ctrlWrapper(waterControllers.getWaterController));
 
@@ -34,4 +34,4 @@ waterRouter.delete(
   ctrlWrapper(waterControllers.deleteWaterController),
 );
 
-export default waterRouter;
+export default router;
