@@ -12,18 +12,12 @@ import { upload } from '../middlewares/multer.js';
 
 const router = Router();
 
-router.get('/:userId', isValidId, ctrlWrapper(getUserByIdController));
+router.get('/', ctrlWrapper(getUserByIdController));
+
+router.patch('/', validateBody(userSchema), ctrlWrapper(patchUserController));
 
 router.patch(
-  '/:userId',
-  isValidId,
-  validateBody(userSchema),
-  ctrlWrapper(patchUserController),
-);
-
-router.patch(
-  '/:userId/photo',
-  isValidId,
+  '/photo',
   upload.single('photo'),
   ctrlWrapper(patchUserAvatarController),
 );
