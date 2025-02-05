@@ -1,0 +1,27 @@
+type: object
+properties:
+  gender:
+    description: Choose your gender
+    type: string
+    enum: ['woman', 'man']
+    default: woman
+  name:
+    description: Enter your name
+    type: string
+    example: 'John Doe'
+  email:
+    description: User's email address
+    type: string
+    example: 'Doe@example.com'
+  password:
+    description: Enter your password
+    type: string
+  photo:
+    description: Link to user's avatar
+    type: string
+    format: binary
+    example: https://res.cloudinary.com/uqwgdu/image/upload/image.png
+  waterRate:
+    description: Daily norm water
+    type: integer
+    example: 1500

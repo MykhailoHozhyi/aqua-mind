@@ -3,6 +3,7 @@ required:
   - email
   - password
   - gender
+  - waterRate
 properties:
   gender:
     description: Choose your gender
@@ -25,3 +26,7 @@ properties:
     type: string
     format: binary
     example: https://res.cloudinary.com/uqwgdu/image/upload/image.png
+  waterRate:
+    description: Daily norm water
+    type: integer
+    example: 1500

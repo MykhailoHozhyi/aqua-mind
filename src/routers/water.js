@@ -7,28 +7,28 @@ import * as waterSchemas from '../validation/water.js';
 
 const router = Router();
 
-waterRouter.get('/', ctrlWrapper(waterControllers.getWaterController));
+router.get('/', ctrlWrapper(waterControllers.getWaterController));
 
-waterRouter.get(
+router.get(
   '/:waterId',
   isValidId,
   ctrlWrapper(waterControllers.getWaterByIdController),
 );
 
-waterRouter.post(
+router.post(
   '/',
   validateBody(waterSchemas.addWaterSchema),
   ctrlWrapper(waterControllers.addWaterController),
 );
 
-waterRouter.patch(
+router.patch(
   '/:waterId',
   isValidId,
   validateBody(waterSchemas.updateWaterSchema),
   ctrlWrapper(waterControllers.updateWaterController),
 );
 
-waterRouter.delete(
+router.delete(
   '/:waterId',
   isValidId,
   ctrlWrapper(waterControllers.deleteWaterController),
