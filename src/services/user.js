@@ -1,6 +1,5 @@
 import { UsersCollection } from '../db/models/user.js';
 import bcrypt from 'bcrypt';
-import createHttpError from 'http-errors';
 
 export const getUserById = async (userId) => {
   const user = await UsersCollection.findOne({ _id: userId });
@@ -9,9 +8,6 @@ export const getUserById = async (userId) => {
 
 export const patchUser = async (userId, payload, options = {}) => {
   const { oldPassword, password, ...restPayload } = payload;
-  console.log('oldPassword', oldPassword);
-  console.log('password', password);
-
   const user = await UsersCollection.findById(userId);
   if (!user) {
     throw new Error('User not found');
@@ -52,18 +48,24 @@ export const patchUser = async (userId, payload, options = {}) => {
 };
 
 export const updateAvatar = async (userId, payload, options = {}) => {
-  const rawResult = await UsersCollection.findByIdAndUpdate(
-    { _id: userId },
-    payload,
-    {
-      new: true,
-      includeResultMetadata: true,
-      ...options,
-    },
-  );
+  const rawResult = await UsersCollection.findByIdAndUpdate(userId, payload, {
+    new: true,
+    includeResultMetadata: true,
+    ...options,
+  });
   if (!rawResult || !rawResult.value) return null;
   return {
     user: rawResult.value,
     isNew: Boolean(rawResult?.lastErrorObject?.upserted),
   };
 };
+
+// export const updateAvatar = async (userId, avatarUrl) => {
+//   const updatedUser = await UsersCollection.findByIdAndUpdate(
+//     userId,
+//     { avatar: avatarUrl },
+//     { new: true },
+//   );
+
+//   return updatedUser || null;
+// };
