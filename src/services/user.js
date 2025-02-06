@@ -59,13 +59,3 @@ export const updateAvatar = async (userId, payload, options = {}) => {
     isNew: Boolean(rawResult?.lastErrorObject?.upserted),
   };
 };
-
-// export const updateAvatar = async (userId, avatarUrl) => {
-//   const updatedUser = await UsersCollection.findByIdAndUpdate(
-//     userId,
-//     { avatar: avatarUrl },
-//     { new: true },
-//   );
-
-//   return updatedUser || null;
-// };
