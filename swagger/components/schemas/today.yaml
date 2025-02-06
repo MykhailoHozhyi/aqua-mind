@@ -1,0 +1,16 @@
+type: object
+properties:
+  percentage:
+    type: string
+    example: '75%'
+  records:
+    type: array
+    items:
+      type: object
+      properties:
+        date:
+          type: string
+          example: '2025-02-05T12:00:00Z'
+        volume:
+          type: number
+          example: 500

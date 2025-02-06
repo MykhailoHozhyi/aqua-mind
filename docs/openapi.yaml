@@ -51,7 +51,7 @@ paths:
   /today:
     get:
       $ref: '../swagger/paths/today/get.yaml'
-  /month:
+  /month/{year}/{month}:
     get:
       $ref: '../swagger/paths/month/get.yaml'
 components:
