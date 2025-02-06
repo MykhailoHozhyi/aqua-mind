@@ -22,7 +22,7 @@ export const getUserByIdController = async (req, res, next) => {
 };
 
 export const patchUserController = async (req, res, next) => {
-  const { userId } = req.user._id;
+  const userId = req.user._id;
   const result = await patchUser(userId, req.body);
   if (!result) {
     next(createHttpError(404, 'User not found'));
@@ -36,7 +36,7 @@ export const patchUserController = async (req, res, next) => {
 };
 
 export const patchUserAvatarController = async (req, res, next) => {
-  const { userId } = req.user._id;
+  const userId = req.user._id;
   const photo = req.file;
   let photoUrl;
   if (photo) {
