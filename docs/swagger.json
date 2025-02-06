@@ -716,7 +716,7 @@
                             "type": "object",
                             "properties": {
                               "date": {
-                                "$ref": "#/components/schemas/water"
+                                "$ref": "#/components/schemas/today"
                               }
                             }
                           }
@@ -740,7 +740,7 @@
         }
       }
     },
-    "/month": {
+    "/month/{year}/{month}": {
       "get": {
         "tags": [
           "Month"
@@ -753,9 +753,33 @@
             "bearerAuth": []
           }
         ],
+        "parameters": [
+          {
+            "name": "year",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 2025
+            },
+            "description": "The year of the requested water consumption data"
+          },
+          {
+            "name": "month",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 12,
+              "example": 2
+            },
+            "description": "The month (1-12) of the requested water consumption data"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Water consumption data retrieved successfully",
+            "description": "Monthly water consumption data retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -767,27 +791,10 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "Water consumption retrieved successfully"
+                      "example": "Monthly water consumption retrieved successfully"
                     },
                     "data": {
-                      "type": "object",
-                      "properties": {
-                        "percentage": {
-                          "type": "string",
-                          "example": "75%"
-                        },
-                        "records": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "date": {
-                                "$ref": "#/components/schemas/water"
-                              }
-                            }
-                          }
-                        }
-                      }
+                      "$ref": "#/components/schemas/month"
                     }
                   }
                 }
@@ -911,24 +918,52 @@
           "waterRate"
         ]
       },
-      "water": {
+      "today": {
         "type": "object",
-        "required": [
-          "date",
-          "volume"
-        ],
         "properties": {
-          "date": {
+          "percentage": {
             "type": "string",
-            "format": "date-time",
-            "example": "2025-02-05T12:30",
-            "description": "Date and time in ISO format (YYYY-MM-DDTHH:mm)"
+            "example": "75%"
           },
-          "volume": {
-            "type": "number",
-            "minimum": 50,
-            "maximum": 5000,
-            "example": 500
+          "records": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "example": "2025-02-05T12:00:00Z"
+                },
+                "volume": {
+                  "type": "number",
+                  "example": 500
+                }
+              }
+            }
+          }
+        }
+      },
+      "month": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "date": {
+              "type": "string",
+              "example": "5, February"
+            },
+            "dailyWaterNorm": {
+              "type": "string",
+              "example": "1.5 L"
+            },
+            "percentage": {
+              "type": "string",
+              "example": "75%"
+            },
+            "consumptionCount": {
+              "type": "integer",
+              "example": 5
+            }
           }
         }
       }

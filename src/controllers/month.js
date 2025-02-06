@@ -1,4 +1,3 @@
-import createHttpError from 'http-errors';
 import { UsersCollection } from '../db/models/user.js';
 import { getMonthlyWater } from '../services/month.js';
 import { format } from 'date-fns';
@@ -8,9 +7,6 @@ export const getMonthlyWaterController = async (req, res, next) => {
   const { year, month } = req.params;
 
   const user = await UsersCollection.findById(userId).select('waterRate');
-  if (!user) {
-    return next(createHttpError(404, 'User not found'));
-  }
 
   const waterRecords = await getMonthlyWater(userId, year, month);
 

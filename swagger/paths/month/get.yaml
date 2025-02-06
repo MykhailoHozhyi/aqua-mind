@@ -5,9 +5,26 @@ operationId: getMonthlyWater
 description: Retrieve the user's water consumption records for the current day.
 security:
   - bearerAuth: []
+parameters:
+  - name: year
+    in: path
+    required: true
+    schema:
+      type: integer
+      example: 2025
+    description: The year of the requested water consumption data
+  - name: month
+    in: path
+    required: true
+    schema:
+      type: integer
+      minimum: 1
+      maximum: 12
+      example: 2
+    description: The month (1-12) of the requested water consumption data
 responses:
   '200':
-    description: Water consumption data retrieved successfully
+    description: Monthly water consumption data retrieved successfully
     content:
       application/json:
         schema:
@@ -18,20 +35,9 @@ responses:
               example: 200
             message:
               type: string
-              example: Water consumption retrieved successfully
+              example: Monthly water consumption retrieved successfully
             data:
-              type: object
-              properties:
-                percentage:
-                  type: string
-                  example: '75%'
-                records:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      date:
-                        $ref: ../../components/schemas/water.yaml
+              $ref: ../../components/schemas/month.yaml
   '401':
     description: Unauthorized
   '404':

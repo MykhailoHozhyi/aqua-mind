@@ -1,0 +1,16 @@
+type: array
+items:
+  type: object
+  properties:
+    date:
+      type: string
+      example: '5, February'
+    dailyWaterNorm:
+      type: string
+      example: '1.5 L'
+    percentage:
+      type: string
+      example: '75%'
+    consumptionCount:
+      type: integer
+      example: 5

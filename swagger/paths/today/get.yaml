@@ -31,7 +31,7 @@ responses:
                     type: object
                     properties:
                       date:
-                        $ref: ../../components/schemas/water.yaml
+                        $ref: ../../components/schemas/today.yaml
   '401':
     description: Unauthorized
   '404':
