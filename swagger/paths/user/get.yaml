@@ -1,17 +1,10 @@
 tags:
   - User
-summary: Get user by id
+summary: Get user
 operationId: getUserByID
 description: 'Get user by id'
 security:
   - bearerAuth: []
-parameters:
-  - in: path
-    name: userId
-    required: true
-    schema:
-      type: string
-      example: '65ca67e7ae7f10c88b598384'
 responses:
   '200':
     description: 'Get user by id'
@@ -32,8 +25,6 @@ responses:
               example: Successfully found contact with id 65ca67e7ae7f10c88b598384!
             data:
               type: object
-              $ref: ../../../components/schemas/user.yaml
-  '400':
-    $ref: ../../../components/responses/400.yaml
+              $ref: ../../components/schemas/user.yaml
   '404':
-    $ref: '../../../components/responses/404.yaml'
+    $ref: '../../components/responses/404.yaml'
