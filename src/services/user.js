@@ -39,7 +39,6 @@ export const patchUser = async (userId, payload, options = {}) => {
     },
   );
   if (!updatedUser || !updatedUser.value) return null;
-  console.log('Password in Mongo after updating:', updatedUser.value.password);
 
   return {
     user: updatedUser.value,
