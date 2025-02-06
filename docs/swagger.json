@@ -324,28 +324,17 @@
         }
       }
     },
-    "/user/{userId}": {
+    "/user": {
       "get": {
         "tags": [
           "User"
         ],
-        "summary": "Get user by id",
+        "summary": "Get user",
         "operationId": "getUserByID",
         "description": "Get user by id",
         "security": [
           {
             "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "userId",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "65ca67e7ae7f10c88b598384"
-            }
           }
         ],
         "responses": {
@@ -378,9 +367,6 @@
               }
             }
           },
-          "400": {
-            "$ref": "#/components/responses/400"
-          },
           "404": {
             "$ref": "#/components/responses/404"
           }
@@ -396,18 +382,6 @@
         "security": [
           {
             "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "userId",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "65ca67e7ae7f10c88b598384"
-            },
-            "description": "ID of the user to update"
           }
         ],
         "requestBody": {
@@ -470,16 +444,13 @@
               }
             }
           },
-          "400": {
-            "$ref": "#/components/responses/400"
-          },
           "404": {
             "$ref": "#/components/responses/404"
           }
         }
       }
     },
-    "/user/{userId}/photo": {
+    "/user/photo": {
       "patch": {
         "tags": [
           "User"
@@ -490,18 +461,6 @@
         "security": [
           {
             "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "userId",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "example": "65ca67e7ae7f10c88b598384"
-            },
-            "description": "ID of the contact to update"
           }
         ],
         "requestBody": {
@@ -549,9 +508,6 @@
                 }
               }
             }
-          },
-          "400": {
-            "$ref": "#/components/responses/400"
           },
           "404": {
             "$ref": "#/components/responses/404"

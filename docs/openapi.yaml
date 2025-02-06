@@ -35,14 +35,14 @@ paths:
   /auth/logout:
     post:
       $ref: ../swagger/paths/auth/logout.yaml
-  /user/{userId}:
+  /user:
     get:
-      $ref: '../swagger/paths/user/{id}/get.yaml'
+      $ref: '../swagger/paths/user/get.yaml'
     patch:
-      $ref: '../swagger/paths/user/{id}/patch.yaml'
-  /user/{userId}/photo:
+      $ref: '../swagger/paths/user/patch.yaml'
+  /user/photo:
     patch:
-      $ref: '../swagger/paths/user/{id}/photo/patch.yaml'
+      $ref: '../swagger/paths/user/photo/patch.yaml'
   /water-rate:
     get:
       $ref: '../swagger/paths/water-rate/get.yaml'
