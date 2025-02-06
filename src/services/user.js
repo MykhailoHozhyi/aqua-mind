@@ -24,7 +24,6 @@ export const patchUser = async (userId, payload, options = {}) => {
       // Додаємо хешований пароль до оновлюваних даних
       restPayload.password = hashedPassword;
     } catch (error) {
-      console.error('Error in hashing password:', error);
       throw new Error('New password was not saved');
     }
   }
