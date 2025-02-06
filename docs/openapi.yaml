@@ -43,6 +43,17 @@ paths:
   /user/{userId}/photo:
     patch:
       $ref: '../swagger/paths/user/{id}/photo/patch.yaml'
+  /water-rate:
+    get:
+      $ref: '../swagger/paths/water-rate/get.yaml'
+    patch:
+      $ref: '../swagger/paths/water-rate/patch.yaml'
+  /today:
+    get:
+      $ref: '../swagger/paths/today/get.yaml'
+  /month:
+    get:
+      $ref: '../swagger/paths/month/get.yaml'
 components:
   securitySchemes:
     bearerAuth:

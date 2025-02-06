@@ -1,0 +1,27 @@
+tags:
+  - WaterRate
+summary: Get user's water consumption rate
+operationId: getWaterRate
+description: Retrieve the current water consumption rate for the authenticated user.
+security:
+  - bearerAuth: []
+responses:
+  '200':
+    description: Water rate found successfully
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Water rate found successfully
+            data:
+              $ref: ../../components/schemas/waterRate.yaml
+  '401':
+    description: Unauthorized
+  '500':
+    description: Internal server error
