@@ -1,0 +1,15 @@
+type: object
+required:
+  - date
+  - volume
+properties:
+  date:
+    type: string
+    format: date-time
+    example: '2025-02-05T12:30'
+    description: Date and time in ISO format (YYYY-MM-DDTHH:mm)
+  volume:
+    type: number
+    minimum: 50
+    maximum: 5000
+    example: 500

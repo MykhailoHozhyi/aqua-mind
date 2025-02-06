@@ -1,0 +1,40 @@
+tags:
+  - Month
+summary: Get today's water consumption
+operationId: getMonthlyWater
+description: Retrieve the user's water consumption records for the current day.
+security:
+  - bearerAuth: []
+responses:
+  '200':
+    description: Water consumption data retrieved successfully
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Water consumption retrieved successfully
+            data:
+              type: object
+              properties:
+                percentage:
+                  type: string
+                  example: '75%'
+                records:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      date:
+                        $ref: ../../components/schemas/water.yaml
+  '401':
+    description: Unauthorized
+  '404':
+    description: User not found
+  '500':
+    description: Internal server error

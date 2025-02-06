@@ -558,6 +558,253 @@
           }
         }
       }
+    },
+    "/water-rate": {
+      "get": {
+        "tags": [
+          "WaterRate"
+        ],
+        "summary": "Get user's water consumption rate",
+        "operationId": "getWaterRate",
+        "description": "Retrieve the current water consumption rate for the authenticated user.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Water rate found successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Water rate found successfully"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/waterRate"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "WaterRate"
+        ],
+        "summary": "Update user's water consumption rate",
+        "operationId": "updateWaterRate",
+        "description": "Modify the water consumption rate for the authenticated user.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "waterRate": {
+                    "type": "number",
+                    "example": 1500
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Water rate updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Water rate updated successfully"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "waterRate": {
+                          "type": "number",
+                          "example": 1500
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/today": {
+      "get": {
+        "tags": [
+          "Today"
+        ],
+        "summary": "Get today's water consumption",
+        "operationId": "getTodayWater",
+        "description": "Retrieve the user's water consumption records for the current day.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Water consumption data retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Water consumption retrieved successfully"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "percentage": {
+                          "type": "string",
+                          "example": "75%"
+                        },
+                        "records": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "date": {
+                                "$ref": "#/components/schemas/water"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/month": {
+      "get": {
+        "tags": [
+          "Month"
+        ],
+        "summary": "Get today's water consumption",
+        "operationId": "getMonthlyWater",
+        "description": "Retrieve the user's water consumption records for the current day.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Water consumption data retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Water consumption retrieved successfully"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "percentage": {
+                          "type": "string",
+                          "example": "75%"
+                        },
+                        "records": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "date": {
+                                "$ref": "#/components/schemas/water"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -649,6 +896,39 @@
             "description": "Daily norm water",
             "type": "integer",
             "example": 1500
+          }
+        }
+      },
+      "waterRate": {
+        "type": "object",
+        "properties": {
+          "waterRate": {
+            "type": "number",
+            "example": 1500
+          }
+        },
+        "required": [
+          "waterRate"
+        ]
+      },
+      "water": {
+        "type": "object",
+        "required": [
+          "date",
+          "volume"
+        ],
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-02-05T12:30",
+            "description": "Date and time in ISO format (YYYY-MM-DDTHH:mm)"
+          },
+          "volume": {
+            "type": "number",
+            "minimum": 50,
+            "maximum": 5000,
+            "example": 500
           }
         }
       }

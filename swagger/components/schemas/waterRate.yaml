@@ -1,0 +1,7 @@
+type: object
+properties:
+  waterRate:
+    type: number
+    example: 1500
+required:
+  - waterRate
