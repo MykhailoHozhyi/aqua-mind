@@ -4,7 +4,6 @@ import {
   patchUserController,
   patchUserAvatarController,
 } from '../controllers/user.js';
-import { isValidId } from '../middlewares/isValidId.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import { userSchema } from '../validation/user.js';

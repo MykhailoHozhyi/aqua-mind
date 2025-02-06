@@ -24,7 +24,6 @@ export const patchUser = async (userId, payload, options = {}) => {
       // Додаємо хешований пароль до оновлюваних даних
       restPayload.password = hashedPassword;
     } catch (error) {
-      console.error('Error in hashing password:', error);
       throw new Error('New password was not saved');
     }
   }
@@ -39,7 +38,6 @@ export const patchUser = async (userId, payload, options = {}) => {
     },
   );
   if (!updatedUser || !updatedUser.value) return null;
-  console.log('Password in Mongo after updating:', updatedUser.value.password);
 
   return {
     user: updatedUser.value,
@@ -59,13 +57,3 @@ export const updateAvatar = async (userId, payload, options = {}) => {
     isNew: Boolean(rawResult?.lastErrorObject?.upserted),
   };
 };
-
-// export const updateAvatar = async (userId, avatarUrl) => {
-//   const updatedUser = await UsersCollection.findByIdAndUpdate(
-//     userId,
-//     { avatar: avatarUrl },
-//     { new: true },
-//   );
-
-//   return updatedUser || null;
-// };
