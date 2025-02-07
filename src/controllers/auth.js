@@ -3,6 +3,7 @@ import {
   loginUser,
   refreshUserSession,
   registerUser,
+  logoutUser,
 } from '../services/auth.js';
 
 export const registerUserController = async (req, res) => {
@@ -38,7 +39,7 @@ export const loginUserController = async (req, res) => {
 
 export const logoutUserController = async (req, res) => {
   if (req.cookies.sessionId) {
-    await loginUser(req.cookies.sessionId);
+    await logoutUser(req.cookies.sessionId);
   }
 
   res.clearCookie('sessionId');
