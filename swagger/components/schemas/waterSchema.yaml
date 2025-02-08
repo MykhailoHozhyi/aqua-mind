@@ -1,0 +1,23 @@
+type: object
+required:
+  - _id
+  - date
+  - volume
+  - userId
+properties:
+  _id:
+    description: "Water's id"
+    type: string
+    example: 65e4decdd286b30065d54af9
+  date:
+    description: "Water's date"
+    type: string
+    example: 2024-12-25T10:44
+  volume:
+    description: "Water's volume"
+    type: number
+    example: 250
+  userId:
+    description: "Water's owner id"
+    type: string
+    example: 65e4decdd286b30065d54af9

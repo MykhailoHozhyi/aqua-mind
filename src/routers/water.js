@@ -4,31 +4,34 @@ import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import { isValidId } from '../middlewares/isValidId.js';
 import * as waterSchemas from '../validation/water.js';
+import { authenticate } from '../middlewares/authenticate.js';
 
 const router = Router();
 
-waterRouter.get('/', ctrlWrapper(waterControllers.getWaterController));
+router.use(authenticate);
 
-waterRouter.get(
+router.get('/', ctrlWrapper(waterControllers.getWaterController));
+
+router.get(
   '/:waterId',
   isValidId,
   ctrlWrapper(waterControllers.getWaterByIdController),
 );
 
-waterRouter.post(
+router.post(
   '/',
   validateBody(waterSchemas.addWaterSchema),
   ctrlWrapper(waterControllers.addWaterController),
 );
 
-waterRouter.patch(
+router.patch(
   '/:waterId',
   isValidId,
   validateBody(waterSchemas.updateWaterSchema),
   ctrlWrapper(waterControllers.updateWaterController),
 );
 
-waterRouter.delete(
+router.delete(
   '/:waterId',
   isValidId,
   ctrlWrapper(waterControllers.deleteWaterController),

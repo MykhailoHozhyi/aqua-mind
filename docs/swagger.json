@@ -278,6 +278,214 @@
           }
         }
       }
+    },
+    "/water": {
+      "post": {
+        "tags": [
+          "Water"
+        ],
+        "summary": "Create water record",
+        "operationId": "createWaterRecord",
+        "description": "Create a water record with payload",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "date",
+                  "volume"
+                ],
+                "properties": {
+                  "date": {
+                    "description": "Water's date",
+                    "type": "string",
+                    "example": "2024-12-25T10:44"
+                  },
+                  "volume": {
+                    "description": "Water's volume",
+                    "type": "number",
+                    "example": "250,"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Creates a water record",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully created a water record!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/waterSchema"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          }
+        }
+      }
+    },
+    "/water/{waterId}": {
+      "patch": {
+        "tags": [
+          "Water"
+        ],
+        "summary": "Patch water record by id",
+        "operationId": "patchWater",
+        "description": "Patch water record by id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "waterId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "65ca67e7ae7f10c88b598384"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "date": {
+                    "description": "Water's date",
+                    "type": "string",
+                    "example": "2024-12-25T10:44"
+                  },
+                  "volume": {
+                    "description": "Water's volume",
+                    "type": "number",
+                    "example": "250,"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Patch water record by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully patched a water record with id 65ca67e7ae7f10c88b598384!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/waterSchema"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Water"
+        ],
+        "summary": "Delete water record by id",
+        "operationId": "deleteWater",
+        "description": "Delete water record by id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "waterId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "65ca67e7ae7f10c88b598384"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Delete water record by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 204
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully deleted a water record with id 65ca67e7ae7f10c88b598384!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -326,6 +534,37 @@
             "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
           }
         }
+      },
+      "waterSchema": {
+        "type": "object",
+        "required": [
+          "_id",
+          "date",
+          "volume",
+          "userId"
+        ],
+        "properties": {
+          "_id": {
+            "description": "Water's id",
+            "type": "string",
+            "example": "65e4decdd286b30065d54af9"
+          },
+          "date": {
+            "description": "Water's date",
+            "type": "string",
+            "example": "2024-12-25T10:44"
+          },
+          "volume": {
+            "description": "Water's volume",
+            "type": "number",
+            "example": 250
+          },
+          "userId": {
+            "description": "Water's owner id",
+            "type": "string",
+            "example": "65e4decdd286b30065d54af9"
+          }
+        }
       }
     },
     "responses": {
@@ -337,7 +576,8 @@
               "type": "object",
               "required": [
                 "status",
-                "message"
+                "message",
+                "data"
               ],
               "properties": {
                 "status": {
@@ -347,6 +587,18 @@
                 "message": {
                   "type": "string",
                   "example": "Invalid userId"
+                }
+              },
+              "data": {
+                "type": "object",
+                "required": [
+                  "message"
+                ],
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "Invalid userId"
+                  }
                 }
               }
             }
@@ -361,7 +613,8 @@
               "type": "object",
               "required": [
                 "status",
-                "message"
+                "message",
+                "data"
               ],
               "properties": {
                 "status": {
@@ -371,6 +624,18 @@
                 "message": {
                   "type": "string",
                   "example": "User not found"
+                }
+              },
+              "data": {
+                "type": "object",
+                "required": [
+                  "message"
+                ],
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "example": "User not found"
+                  }
                 }
               }
             }
