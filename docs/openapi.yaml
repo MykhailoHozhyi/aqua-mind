@@ -36,9 +36,9 @@ paths:
       $ref: '../swagger/path/water/post.yaml'
   /water/{waterId}:
     patch:
-      $ref: '../swagger/path/water/{id}/patch.yaml'
+      $ref: '../swagger/path/water/{waterId}/patch.yaml'
     delete:
-      $ref: '../swagger/path/water/{id}/delete.yaml'
+      $ref: '../swagger/path/water/{waterId}/delete.yaml'
 components:
   securitySchemes:
     bearerAuth:
