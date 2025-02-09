@@ -1,0 +1,47 @@
+tags:
+  - Water
+summary: Create water record
+operationId: createWaterRecord
+description: 'Create a water record with payload'
+security:
+  - bearerAuth: []
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        required:
+          - date
+          - volume
+        properties:
+          date:
+            description: Date and time in ISO format (YYYY-MM-DDTHH:mm)
+            type: string
+            example: '2025-02-05T12:30'
+          volume:
+            description: "Water's volume"
+            type: number
+            example: 250,
+responses:
+  '201':
+    description: Creates a water record
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: Successfully created a water record!
+            data:
+              type: object
+              $ref: ../../components/schemas/water.yaml
+  '401':
+    $ref: ../../components/responses/401.yaml
