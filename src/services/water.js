@@ -6,9 +6,9 @@ export const getWaterRecord = (filter) => WaterCollection.findOne(filter);
 
 export const addWater = (payload) => WaterCollection.create(payload);
 
-export const updateWater = async (contactId, userId, payload) => {
+export const updateWater = async (waterId, userId, payload) => {
   const result = await WaterCollection.findOneAndUpdate(
-    { _id: contactId, userId },
+    { _id: waterId, userId },
     payload,
     {
       new: true,
@@ -17,9 +17,9 @@ export const updateWater = async (contactId, userId, payload) => {
   return result;
 };
 
-export const deleteWater = async (contactId, userId) => {
+export const deleteWater = async (waterId, userId) => {
   const result = await WaterCollection.findOneAndDelete({
-    _id: contactId,
+    _id: waterId,
     userId,
   });
   return result;

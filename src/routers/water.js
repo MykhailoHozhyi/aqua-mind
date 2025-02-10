@@ -4,6 +4,8 @@ import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import { isValidId } from '../middlewares/isValidId.js';
 import * as waterSchemas from '../validation/water.js';
+import todayRouter from './today.js';
+import monthRouter from './month.js';
 
 const router = Router();
 
@@ -33,5 +35,8 @@ router.delete(
   isValidId,
   ctrlWrapper(waterControllers.deleteWaterController),
 );
+
+router.use('/today', todayRouter);
+router.use('/month', monthRouter);
 
 export default router;

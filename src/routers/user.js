@@ -8,6 +8,7 @@ import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import { userSchema } from '../validation/user.js';
 import { upload } from '../middlewares/multer.js';
+import waterRateRouter from './waterRate.js';
 
 const router = Router();
 
@@ -20,4 +21,7 @@ router.patch(
   upload.single('photo'),
   ctrlWrapper(patchUserAvatarController),
 );
+
+router.use('/water-rate', waterRateRouter);
+
 export default router;

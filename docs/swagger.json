@@ -11,10 +11,10 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000"
+      "url": "https://aqua-mind.onrender.com"
     },
     {
-      "url": "https://aqua-mind.onrender.com"
+      "url": "http://localhost:3000"
     }
   ],
   "tags": [
@@ -27,20 +27,8 @@
       "description": "Operations about user."
     },
     {
-      "name": "WaterRate",
-      "description": "Calc of daily water intake."
-    },
-    {
       "name": "Water",
       "description": "Water operations."
-    },
-    {
-      "name": "Today",
-      "description": "Information about water consumption per day."
-    },
-    {
-      "name": "Month",
-      "description": "Information about water consumption per month."
     }
   ],
   "paths": {
@@ -515,10 +503,10 @@
         }
       }
     },
-    "/water-rate": {
+    "/user/water-rate": {
       "get": {
         "tags": [
-          "WaterRate"
+          "User"
         ],
         "summary": "Get user's water consumption rate",
         "operationId": "getWaterRate",
@@ -562,7 +550,7 @@
       },
       "patch": {
         "tags": [
-          "WaterRate"
+          "User"
         ],
         "summary": "Update user's water consumption rate",
         "operationId": "updateWaterRate",
@@ -630,10 +618,10 @@
         }
       }
     },
-    "/today": {
+    "/water/today": {
       "get": {
         "tags": [
-          "Today"
+          "Water"
         ],
         "summary": "Get today's water consumption",
         "operationId": "getTodayWater",
@@ -696,10 +684,10 @@
         }
       }
     },
-    "/month/{year}/{month}": {
+    "/water/month/{year}/{month}": {
       "get": {
         "tags": [
-          "Month"
+          "Water"
         ],
         "summary": "Get today's water consumption",
         "operationId": "getMonthlyWater",
@@ -765,6 +753,220 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/water": {
+      "post": {
+        "tags": [
+          "Water"
+        ],
+        "summary": "Create water record",
+        "operationId": "createWaterRecord",
+        "description": "Create a water record with payload",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "date",
+                  "volume"
+                ],
+                "properties": {
+                  "date": {
+                    "description": "Date and time in ISO format (YYYY-MM-DDTHH:mm)",
+                    "type": "string",
+                    "example": "2025-02-05T12:30"
+                  },
+                  "volume": {
+                    "description": "Water's volume",
+                    "type": "number",
+                    "example": "250,"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Creates a water record",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully created a water record!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/water"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        }
+      }
+    },
+    "/water/{waterId}": {
+      "patch": {
+        "tags": [
+          "Water"
+        ],
+        "summary": "Patch water record by id",
+        "operationId": "patchWater",
+        "description": "Patch water record by id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "waterId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "65ca67e7ae7f10c88b598384"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "date": {
+                    "description": "Date and time in ISO format (YYYY-MM-DDTHH:mm)",
+                    "type": "string",
+                    "example": "2025-02-05T12:30"
+                  },
+                  "volume": {
+                    "description": "Water's volume",
+                    "type": "number",
+                    "example": "250,"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Patch water record by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully patched a water record with id 65ca67e7ae7f10c88b598384!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/water"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Water"
+        ],
+        "summary": "Delete water record by id",
+        "operationId": "deleteWater",
+        "description": "Delete water record by id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "waterId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "65ca67e7ae7f10c88b598384"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Delete water record by id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 204
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully deleted a water record with id 65ca67e7ae7f10c88b598384!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
           }
         }
       }
@@ -920,6 +1122,27 @@
               "type": "integer",
               "example": 5
             }
+          }
+        }
+      },
+      "water": {
+        "type": "object",
+        "required": [
+          "date",
+          "volume"
+        ],
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-02-05T12:30",
+            "description": "Date and time in ISO format (YYYY-MM-DDTHH:mm)"
+          },
+          "volume": {
+            "type": "number",
+            "minimum": 50,
+            "maximum": 5000,
+            "example": 500
           }
         }
       }

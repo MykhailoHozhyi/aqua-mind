@@ -1,5 +1,5 @@
 tags:
-  - Today
+  - Water
 summary: Get today's water consumption
 operationId: getTodayWater
 description: Retrieve the user's water consumption records for the current day.
