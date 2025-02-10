@@ -11,6 +11,9 @@ const router = Router();
 
 router.get('/', ctrlWrapper(waterControllers.getWaterController));
 
+router.use('/today', todayRouter);
+router.use('/month', monthRouter);
+
 router.get(
   '/:waterId',
   isValidId,
@@ -35,8 +38,5 @@ router.delete(
   isValidId,
   ctrlWrapper(waterControllers.deleteWaterController),
 );
-
-router.use('/today', todayRouter);
-router.use('/month', monthRouter);
 
 export default router;
