@@ -54,6 +54,14 @@ paths:
   /month/{year}/{month}:
     get:
       $ref: '../swagger/paths/month/get.yaml'
+  /water:
+    post:
+      $ref: '../swagger/paths/water/post.yaml'
+  /water/{waterId}:
+    patch:
+      $ref: '../swagger/paths/water/{waterId}/patch.yaml'
+    delete:
+      $ref: '../swagger/paths/water/{waterId}/delete.yaml'
 components:
   securitySchemes:
     bearerAuth:

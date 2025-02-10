@@ -1,0 +1,53 @@
+tags:
+  - Water
+summary: Patch water record by id
+operationId: patchWater
+description: 'Patch water record by id'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: waterId
+    required: true
+    schema:
+      type: string
+      example: '65ca67e7ae7f10c88b598384'
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          date:
+            description: Date and time in ISO format (YYYY-MM-DDTHH:mm)
+            type: string
+            example: '2025-02-05T12:30'
+          volume:
+            description: "Water's volume"
+            type: number
+            example: 250,
+responses:
+  '200':
+    description: 'Patch water record by id'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully patched a water record with id 65ca67e7ae7f10c88b598384!
+            data:
+              type: object
+              $ref: ../../../components/schemas/water.yaml
+  '401':
+    $ref: ../../../components/responses/401.yaml
+  '404':
+    $ref: '../../../components/responses/404.yaml'
