@@ -37,7 +37,7 @@ export const addWaterController = async (req, res) => {
 export const updateWaterController = async (req, res) => {
   const { waterId } = req.params;
   const { _id: userId } = req.user;
-  const data = await waterServices.updateContact(waterId, userId, {
+  const data = await waterServices.updateWater(waterId, userId, {
     ...req.body,
   });
   if (!data) {
@@ -53,7 +53,7 @@ export const updateWaterController = async (req, res) => {
 export const deleteWaterController = async (req, res) => {
   const { waterId } = req.params;
   const { _id: userId } = req.user;
-  const data = await waterServices.deleteContact(waterId, userId);
+  const data = await waterServices.deleteWater(waterId, userId);
 
   if (!data) {
     throw createHttpError(404, 'Water record not found');
