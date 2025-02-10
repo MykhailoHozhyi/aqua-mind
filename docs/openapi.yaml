@@ -11,17 +11,11 @@ tags:
     description: Auth operations.
   - name: User
     description: Operations about user.
-  - name: WaterRate
-    description: Calc of daily water intake.
   - name: Water
     description: Water operations.
-  - name: Today
-    description: Information about water consumption per day.
-  - name: Month
-    description: Information about water consumption per month.
 servers:
-  - url: http://localhost:3000
   - url: https://aqua-mind.onrender.com
+  - url: http://localhost:3000
 paths:
   /auth/register:
     post:
@@ -43,15 +37,15 @@ paths:
   /user/photo:
     patch:
       $ref: '../swagger/paths/user/photo/patch.yaml'
-  /water-rate:
+  /user/water-rate:
     get:
       $ref: '../swagger/paths/water-rate/get.yaml'
     patch:
       $ref: '../swagger/paths/water-rate/patch.yaml'
-  /today:
+  /water/today:
     get:
       $ref: '../swagger/paths/today/get.yaml'
-  /month/{year}/{month}:
+  /water/month/{year}/{month}:
     get:
       $ref: '../swagger/paths/month/get.yaml'
   /water:

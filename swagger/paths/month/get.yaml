@@ -1,5 +1,5 @@
 tags:
-  - Month
+  - Water
 summary: Get today's water consumption
 operationId: getMonthlyWater
 description: Retrieve the user's water consumption records for the current day.

@@ -1,5 +1,5 @@
 tags:
-  - WaterRate
+  - User
 summary: Get user's water consumption rate
 operationId: getWaterRate
 description: Retrieve the current water consumption rate for the authenticated user.
